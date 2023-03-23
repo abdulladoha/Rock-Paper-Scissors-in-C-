@@ -1,3 +1,4 @@
+
 using System;
 
 public class Program
@@ -14,15 +15,27 @@ public class Program
         while (playAgain)
         {
             Console.Write("Enter your choice (ROCK, PAPER or SCISSORS): ");
-            string inputPlayer = Console.ReadLine().ToUpper();
+            string? inputPlayer = Console.ReadLine();
+            if(inputPlayer is not null)
+            {
+                inputPlayer = inputPlayer.ToUpper();
+            }
 
             Random rnd = new Random();
             int randomInt = rnd.Next(choices.Length);
             string inputCPU = choices[randomInt];
+            int winner = -1;
 
             Console.WriteLine($"CPU chose {inputCPU}");
 
-            int winner = GetWinner(inputPlayer, inputCPU);
+            if (!string.IsNullOrEmpty(inputPlayer))
+            {
+                winner = GetWinner(inputPlayer, inputCPU);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please try again.");
+            }
 
             switch (winner)
             {
@@ -42,7 +55,7 @@ public class Program
             Console.WriteLine($"Score: Player {scorePlayer} - {scoreCPU} CPU");
 
             Console.Write("Do you want to play again? (YES/NO) ");
-            string answer = Console.ReadLine().ToUpper();
+            string answer = Console.ReadLine()?.ToUpper()?? "";
             
             if(answer == "Y")
             {
