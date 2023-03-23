@@ -1,2 +1,2 @@
 # Rock-Paper-Scissors-in-C#
-Firt project in C#
+My first project in C#
